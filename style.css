@@ -1,25 +1,66 @@
 * {
-    margin : 0;
     padding: 0;
-};
+    margin: 0;
+}
 
-.body {
+body {
+    width: 100%;
+    height: 1000px;
+}
 
-    display:flex;
+p {
+
+display: inline-block;
 
 }
 
-.nav {
+nav { 
+    height: 100%;
+    width: 15%;
+    background-color: blue
+}
 
-    background-color: red;
-};
+.container flex {
+    color: black;
+    width: 100%;
+    height: 100%;
+}
+.flex{
+    display:flex;
+}
 
 .main {
-    width: 100%;
+    height: 100%;
+    width: 60%;
     background-color: green
-};
+}
 
+#anime-image {
+    max-width:200px;
+}
 
-.extras {
+#anime-name {
+    max-width:300px;
+}
+
+#anime-sinopse {
+    max-width:200px;
+}
+
+#anime-genero{
+
+}
+
+#anime-nota {
+
+}
+
+.news {
+    height: 100%;
+    width: 25%;
     background-color: yellow;
-};
+}
+
+.clear {
+    clear: both;
+}
