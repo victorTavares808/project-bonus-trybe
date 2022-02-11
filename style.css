@@ -8,16 +8,35 @@ body {
     height: 1000px;
 }
 
-p {
-
-display: inline-block;
+div{
 
 }
 
+p {
+    display: inline-block;
+    color: white;
+    font-size: 30px;
+}
+
+span {
+
+    color:rgba(242, 198, 65, 1);
+   
+};
+
 nav { 
+    font-size: 40px;
+    color: rgba(242, 198, 65, 1);
     height: 100%;
-    width: 15%;
-    background-color: blue
+    width: 20%;
+    background-color: rgb(1, 2, 10); 
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 150px;
 }
 
 .container flex {
@@ -32,42 +51,45 @@ nav {
 .main {
     height: 100%;
     width: 60%;
-    background-color: green
+    background-color: rgb(1, 2, 10); 
 }
 
 #anime-image {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://media.kitsu.io/anime/poster_images/100/large.jpg");
-    height: 72%;
+    height: 90%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
-/*     max-width:300px;
-    padding-left: 220px;
-    padding-bottom: 70px; */
+    position: absolute;
 }
 
 #anime-name {
+    color: white;
     max-width:300px;
 }
 
 #anime-sinopse {
-    max-width:200px;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    top:100px;
+    position: absolute;
 }
 
 #anime-genero{
-
+    color: white;
 }
 
-#anime-nota {
-
-}
+/* #anime-nota {
+    color:rgba(242, 198, 65, 1);
+} */
 
 .news {
     height: 100%;
-    width: 25%;
-    background-color: yellow;
+    width: 20%;
+    background-color:rgb(1, 2, 10); 
 }
+
 
 .clear {
     clear: both;
