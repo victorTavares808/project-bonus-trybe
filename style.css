@@ -1,25 +1,34 @@
 * {
-    margin : 0;
     padding: 0;
+    margin: 0;
 };
 
-.body {
-
-    display:flex;
-
+.container {
+    color: black;
+    width: 100%;
+    height: 100%;
 }
-
-.nav {
-
-    background-color: red;
+.flex{
+    display:flex;
+}
+.nav { 
+    height: 100px;
+    width: 100px;
 };
 
 .main {
-    width: 100%;
+    height: 100px;
+    width: 100px;
     background-color: green
 };
 
 
 .extras {
+    height: 100px;
+    width: 100px;
     background-color: yellow;
 };
+
+.clear{
+    clear: both;
+}
