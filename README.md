@@ -1,5 +1,3 @@
-# project-bonus-trybe
-
 *Requisitos obrigatórios:
 
 - Utilizar uma API externa desta lista(https://github.com/public-apis/public-apis);
