@@ -71,7 +71,7 @@ section{
     clear: both;
 }
 
-.text-pos{
+.text-pos {
     position: absolute;
     max-width: 500px;
     top: 77%;
