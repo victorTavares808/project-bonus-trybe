@@ -1,128 +1,65 @@
+const linkYouTube = 'https://www.youtube.com/embed/'
 
-const div = document.querySelector('.grow');
-const opcoes = document.querySelectorAll('.opcoes')
+// Recuperando tags do HTML com NodeList
+const divBanners = document.querySelector('.animes');
+const bannerPrincipal = document.querySelector('.banners');
+const tituloDoAnime = document.querySelector('#titulo-do-anime');
+const descricaoDoAnime = document.querySelector('#descricao');
+const notaDoAnime = document.querySelector('#nota');
+const tituloVideo = document.querySelector('.titulo-video')
 
-
-
-// Constroi array com links de imagens
-const id = async () => {
-    let arrayVazioId = [];
-    for (let index = 1; index < 80; index += 20) {
-      const url = `https://kitsu.io/api/edge/anime?page[limit]=20&page[offset]=${index}`;
-      const chamaApi = await fetch(url);
-      const response = await chamaApi.json();
-      const arrayDeObjetos = response.data;
-      arrayDeObjetos.find((element) => {
-        if(!element.attributes.description.includes('sex') &&
-        !element.attributes.canonicalTitle.includes('Ghost in the Shell') &&
-        !element.attributes.description.includes('hentai') &&
-        !element.attributes.description.includes('girls') &&
-        !element.attributes.canonicalTitle.includes('Rozen Maiden') &&
-        !element.attributes.canonicalTitle.includes('DearS')) {
-            console.log(element)
-            arrayVazioId.push(element.attributes.posterImage.large);
-        }
-      });
-    }
-    /* console.log(arrayVazioId) */
-    return arrayVazioId;
-  };
-
-// Constroi array de Ids
-const pegaId = async () => {
-    let arrayVazioIds = [];
-    for (let index = 1; index < 80; index += 20) {
-      const url = `https://kitsu.io/api/edge/anime?page[limit]=20&page[offset]=${index}`;
-      const chamaApi = await fetch(url);
-      const response = await chamaApi.json();
-      const arrayDeObjetos = response.data;
-      arrayDeObjetos.find((element) => {
-        if(!element.attributes.description.includes('sex') &&
-        !element.attributes.canonicalTitle.includes('Ghost in the Shell') &&
-        !element.attributes.description.includes('hentai') &&
-        !element.attributes.description.includes('girls') &&
-        !element.attributes.canonicalTitle.includes('Rozen Maiden') &&
-        !element.attributes.canonicalTitle.includes('DearS')) {
-            arrayVazioIds.push(element.id);
-        }
-        });
-    }
-      return arrayVazioIds;
+// kitsu() => Acessa arquivo json da Api Kitsu
+const kitsu = async () => {
+    const url = 'https://kitsu.io/api/edge/anime?page[limit]=20&page[offset]=20';
+    const chamaApi = await fetch(url);
+    const response = await chamaApi.json();
+    return response; 
 }
-    // Cria elementos e adiciona todos como filho da tag div
-    const manipulacao = (im) => {
-        const principal = document.querySelector('.main');
-        const para = document.querySelector('.lorem');
-        const para2 = document.querySelector('.synopsis')
-        const div = document.querySelector('.grow');
-        const h1 = document.querySelector('.nome-anime');
-        const nota = document.querySelector('.nota');
-        const lorem = document.querySelector('.lorem');
-        const imagem = document.createElement('img');
-        
-        imagem.src = im.attributes.posterImage.large
-        h1.innerText = im.attributes.canonicalTitle;
-        para.innerText = im.attributes.synopsis;
-        
-        div.appendChild(imagem);
-        principal.style.backgroundImage = `url(${im.attributes.posterImage.large})`
-        /* div.appendChild(img); */
-    }
 
-  
-  // 
-  const lida = id().then((data) => {
-    let contador = 0;
-    data.forEach((element) => {
-        const img = document.createElement('img');
-        img.src = element;
-        img.classList.add('banners-animes');
-        div.appendChild(img);
+// capturaVideo() => Essa função pega um id, junta com a url do You tube para encontrar o vídeo referente ao id e cria uma tag para colocar o vídeo;
+const capturaVideo = (id) => {
+    const tagVideo = document.querySelector('.video')
+    tagVideo.src = linkYouTube + id;
+}
+
+// manipulacaoBanners => Monta imagem com src, class e id
+const manipulacaoBanners = (image, identificacao) => {
+    const imagem = document.createElement('img');
+    imagem.src = image;
+    imagem.id = identificacao
+    imagem.classList.add('imageAnimes')
+    divBanners.appendChild(imagem);
+}
+
+// manipulacaoTexto() Monta texto ou numeração para titulo, descricao, titulo do vídeo e nota =>
+const manipulacaoTexto = (titulo, descricao, nota) => {
+    tituloDoAnime.innerText = titulo;
+    descricaoDoAnime.innerText = descricao;
+    notaDoAnime.innerText = `Nota: ${nota}`;
+    tituloVideo.innerText = titulo;
+}
+
+// Linha 21 a 29 => É feito um forEach em cima do data.data que seria o array de objetos para criar imagem com url e id;
+kitsu().then((data) => {
+    data.data.forEach((element) => {
+        if (!element.attributes
+                .canonicalTitle
+                    .includes('Ghost in the Shell')) {
+            manipulacaoBanners(element.attributes.posterImage.large, element.id)
+        };
     });
-    pegaId().then((data) => {
-      const teste = document.querySelectorAll('.banners-animes');
-      data.forEach((element) => {
-        teste[contador].id = element;
-        contador += 1
-      })
-      teste.forEach((element) => {
-          element.addEventListener('click', async () => {
-              const capturaID = element.id;
-              console.log(capturaID)
-              for (let index = 1; index < 80; index += 20) {
-                const url = `https://kitsu.io/api/edge/anime?page[limit]=20&page[offset]=${index}`;
-                const chamaApi = await fetch(url);
-                const response = await chamaApi.json();
-                const arrayDeObjetos = response.data;
-                arrayDeObjetos.find((element) => {
-                    if (capturaID === element.id) {
-                        console.log(element);
-                        manipulacao(element);
-                    }
-                });
-            }
-          });
-      });
-    })
-  })
-
-  opcoes.forEach((element) => {
-    element.addEventListener('click', (event) => {
-      if(event.target === opcoes[0]) { // Categorias
-        console.log('Você clicou na primeira opção :D');
-      }
-      if (event.target === opcoes[1]) { // Top Ratings
-        console.log('Você clicou na segunda opção :D');
-      }
-      if (event.target === opcoes[2]) { // Lista
-        console.log('Você clicou na terceira opção')
-      }
-      if (event.target === opcoes[3]) { // Descubra
-        console.log('Você clicou na quarta opção')
-      }
-    })
-  });
-  
-  window.onload = async () => {
-
-  };
+    // Linha 40 a 53 estou recuperando todas as imagens e jogando um evento de click nelas e dentro do evento de click eu estou comparando se o id do objeto é o mesmo id que foi pego pelo target com um find, se for ele é pego por uma constante, e apos isso eu uso a função manipulacaoTexto para colocar cada informação no seu devido lugar. 
+    const imagemDeAnimes = document.querySelectorAll('.imageAnimes')
+    imagemDeAnimes.forEach((element) => element.addEventListener('click', (event) => {
+        const clickId = event.target.id;
+        const objetoAnime = data.data.find((element) => element.id === clickId);
+        console.log(objetoAnime.attributes.youtubeVideoId)
+        manipulacaoTexto(objetoAnime
+            .attributes.canonicalTitle, objetoAnime
+            .attributes.description, objetoAnime
+            .attributes.averageRating);
+        capturaVideo(objetoAnime.attributes.youtubeVideoId)
+        bannerPrincipal.style.backgroundImage = `url('${objetoAnime.attributes.posterImage.large}'`;
+        bannerPrincipal.style.backgroundRepeat = 'no-repeat'
+    }))
+});

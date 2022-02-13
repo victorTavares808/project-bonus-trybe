@@ -1,48 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@620&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-    <div class="topo">
-        <p>Anima Trybe</p>
-    </div>
-    <section class="container flex">
-        <div class="nav">
-            <h1 id='title'>Anima Trybe</h1>
-            <ol class="menu">
-                <li class="opcoes">CATEGORIAS</li>
-                <li class="opcoes">TOP RATINGS</li>
-                <li class="opcoes">LISTA</li>
-                <li class="opcoes">DESCUBRA</li>
-            </ol>
-        </div>
-        <hr>
-            <div class="main">
-                <div class="text-pos">
-                    <h1 class="nome-anime"></h1>
-                    <p class="lorem"></p>
-                    <p class="synopsis"></p>
-                    <p class="genero"></p>
-                    <span class="nota"></span>
-            <!--   <div class="pad">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima, sit nemo voluptate a ea magni doloremque consequatur voluptatem, quis nulla odit quaerat excepturi quibusdam pariatur quae recusandae itaque dolor quidem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus necessitatibus repellendus maiores cupiditate dolorum sunt, culpa assumenda ipsa quo tempore aut esse ullam, aliquid mollitia tenetur? Soluta magni asperiores nam.</div> -->
+    <header class="cabecalho">
+        <h1>Animes</h1>
+    </header>
+    <nav class="navegacao"></nav>
+    <main> 
+        <div class="banners"></div>
+        <div class="container-texto">
+            <div class="textos">
+                <h2 id="titulo-do-anime">Lorem, ipsum.</h1>
+                <p id="descricao">Descrição: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse, eligendi.</p>
+                <p id="nota"> nota: Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti repellat placeat fugit officia sit neque, mollitia consectetur hic commodi consequuntur omnis, nostrum doloribus, enim corrupti officiis. Obcaecati cumque laborum et!</p>
             </div>
         </div>
-        <div class='carrossel'>
-            <div class='grow'></div>
+        <div class="carrossel">
+            <div class="animes"></div>
         </div>
+        <div container="container-titulo-video">
+            <h2 class="titulo-video">Pensando....</h2>
         </div>
-        <hr>
-        <div class="extras">
+        <div class="container-video">
+            <iframe class="video" width="1600" height="720" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <script src="script.js"></script>
-    </section>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>
