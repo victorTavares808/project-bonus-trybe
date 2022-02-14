@@ -1,3 +1,4 @@
+
 // Links para concatenação com ids de vídeos
 const linkYouTube = 'https://www.youtube.com/embed/'
 
@@ -13,6 +14,7 @@ const proximaLista = document.querySelector('.proximo');
 const proximaLista2 = document.querySelector('.btn2');
 const main = document.getElementById('main');
 let soma = 20;
+
 
 // kitsu() => Acessa arquivo json da Api Kitsu
 const kitsu = async (pagina) => {

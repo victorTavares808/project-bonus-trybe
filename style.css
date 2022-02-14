@@ -126,11 +126,13 @@
   .proximo {
     display:flex;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 100em;
     width: 100%;
     padding: 10px;
     font-size: 20px;
-    color: white;
+    color: black;
+    background-color: white;
+    cursor: pointer;
   }
 
   span.proximo{

@@ -1,0 +1,29 @@
+{
+  "name": "project-bonus-trybe",
+  "version": "1.0.0",
+  "description": "*Requisitos obrigatórios:",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorTavares808/project-bonus-trybe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victorTavares808/project-bonus-trybe/issues"
+  },
+  "homepage": "https://github.com/victorTavares808/project-bonus-trybe#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  },
+  "transform": {
+    "\\.js$": "<rootDir>/node_modules/babel-jest"
+  },
+  "dependencies": {
+    "node-fetch": "^3.2.0"
+  }
+}
