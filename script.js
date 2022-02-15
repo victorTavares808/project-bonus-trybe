@@ -1,5 +1,41 @@
-// Links para concatenação com ids de vídeos que id válido
-const linkYouTube = 'https://www.youtube.com/embed/'
+/* 
+
+URL para trazer informações de animes
+    vários animes: https://api.aniapi.com/v1/anime
+
+    referente ao id especificado https://api.aniapi.com/v1/anime/v1/anime/:id
+
+    OBS: A url abaixo deve receber title, anilist_id, mal_id, formats, status, year, season genres
+
+    Outra forma de acessar: https://api.aniapi.com/v1/anime?title=One%20Piece&formats=0,1&status=1&year=1999&season=3&genres=Pirates,War,Cyborg&nsfw=true
+
+    Mais outra forma: https://api.aniapi.com/v1/random/anime/:count/:nsfw
+
+URL para trazer episódio dos animes:
+    Observação: O primeiro número da url é o id do anime e o segundo é episódio especifico (o segundo valor não é obrigatório, se não tiver o segundo ele trará todos os episódeos)
+
+    https://api.aniapi.com/v1/episode?anime_id=11&number=11&is_dub=true&locale=it
+
+URL para trazer musicas dos animes:
+
+    para busca música especifica: https://api.aniapi.com/v1/song/:id
+
+    para buscar várias musicas https://api.aniapi.com/v1/song
+
+URL para trazer musicas dos animes:
+
+    Observação: na url tem que ser passado o anime_id, title, artist, year, season e type
+
+    para buscar músicas: https://api.aniapi.com/v1/song?anime_id=10&title=Naruto&artist=FLOW&year=2010&season=5&type=nada
+
+    Outra forma de buscar: https://api.aniapi.com/v1/random/song/5
+
+URL para retornar uma lista aleatória de animes 
+
+    https://api.aniapi.com/v1/random/anime/5/true
+
+
+*/
 
 // Recuperando tags do HTML com NodeList
 const divBanners = document.querySelector('.animes');
@@ -12,42 +48,102 @@ const tituloVideo = document.querySelector('.titulo-video');
 const proximaLista = document.querySelector('.proximo');
 const proximaLista2 = document.querySelector('.btn2');
 const main = document.getElementById('main');
+const caixaDeBusca = document.querySelector('.caixa-de-busca');
+const botaoDePesquisa = document.querySelector('.pesquisar');
+const divAnimes = document.querySelector('.episodios');
 
-// kitsu() => Acessa arquivo json da Api Kitsu
-const kitsu = async (pagina) => {
-    const url = `https://kitsu.io/api/edge/anime?page[limit]=20&page[offset]=${pagina}`;
-    const chamaApi = await fetch(url);
-    const response = await chamaApi.json();
-    /* console.log(response.data); */
-    return response; 
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExNDgiLCJuYmYiOjE2NDQ2Nzc4NzIsImV4cCI6MTY0NzI2OTg3MiwiaWF0IjoxNjQ0Njc3ODcyfQ.wNFd0OuwHmQtIFtyW915VngV5rsB5ljjwTUSNg4CBUY';
+
+const aniApiAnimes = async () => {
+    const responseInfo = {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': 'no-cors'
+        },
+      }
+    /* const url = 'https://api.aniapi.com/v1/anime'; */
+    const url = 'https://api.aniapi.com/v1/anime'
+    const api = await fetch(url, responseInfo);
+    const response = await api.json();
+    return response;
+};
+
+aniApiAnimes().then((data) => data);
+
+const aniApiPesquisa = async (pesquisa) => {
+    const responseInfo = {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': 'no-cors'
+        },
+      }
+    /* const url = 'https://api.aniapi.com/v1/anime'; */
+    const url = `https://api.aniapi.com/v1/anime?title=${pesquisa}%20&nsfw=true`
+    const api = await fetch(url, responseInfo);
+    const response = await api.json();
+    return response;
+};
+
+const aniApiEpisode = async (id = 11) => {
+    const responseInfo = {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': 'no-cors'
+        },
+      }
+    /* const url = 'https://api.aniapi.com/v1/anime'; */
+    const url = `https://api.aniapi.com/v1/episode?anime_id=${id}&number=&is_dub=true&locale=it`
+    const api = await fetch(url, responseInfo);
+    const response = await api.json();
+    return response;
+};
+
+const colocaEpisodios = (img) => {
+    const caminho = document.createElement('source')
+    caminho.src = img
+    caminho.type = 'video/mp4'
+    divAnimes.appendChild(caminho)
 }
 
-// Ordena filhos da tag com class animes1
-const ordernar = () => {
-  const arrayBanners = document.querySelector('.animes1');
-  [...arrayBanners.children]
-  .sort((a,b)=> parseFloat(b.alt) - parseFloat(a.alt))
-  .forEach( elemento => arrayBanners.appendChild(elemento))
-  /* console.log(x) */
-}
+aniApiEpisode().then((data) => {
+   console.log(data.data.current_page = 2)
+   console.log(data.data)
+});
 
-// capturaVideo() => Essa função pega um id, junta com a url do You tube para encontrar o vídeo referente ao id e cria uma tag para colocar o vídeo;
-const capturaVideo = (id) => {
-    const tagVideo = document.querySelector('.video');
-    tagVideo.src = linkYouTube + id;
-}
+botaoDePesquisa.addEventListener('click', () => {
+    aniApiPesquisa(caixaDeBusca.value.split(' ').join('%20'))
+        .then((data) => data.data.documents);
+});
 
-// manipulacaoBanners => Monta imagem com src, class e id
-const manipulacaoBanners = (image, identificacao,rating, local) => {
+/* aniApiPesquisa().then((data) => console.log(data.data.documents)) */
+
+const manipulacaoBanners = (image, identificacao, rating, local1) => {
     const imagem = document.createElement('img');
     imagem.src = image;
     imagem.id = identificacao;
     imagem.alt = rating;
     imagem.classList.add('imageAnimes');
-    local.appendChild(imagem);
+    local1.appendChild(imagem);
 }
 
-// manipulacaoTexto() Monta texto ou numeração para titulo, descricao, titulo do vídeo e nota =>
+const manipulacaoBanners1 = (image, identificacao, rating, local1) => {
+    const imagem = document.createElement('img');
+    imagem.src = image;
+    imagem.id = identificacao;
+    imagem.alt = rating;
+    imagem.classList.add('imageAnimes');
+    local1.appendChild(imagem);
+}
+
 const manipulacaoTexto = (titulo, descricao, nota) => {
     tituloDoAnime.innerText = titulo;
     descricaoDoAnime.innerText = descricao;
@@ -55,116 +151,34 @@ const manipulacaoTexto = (titulo, descricao, nota) => {
     tituloVideo.innerText = titulo;
 }
 
-kitsu(0).then((data) => {
-    data.data.forEach((element) => {
-        if (!element.attributes
-                .canonicalTitle
-                .includes('Ghost in the Shell')) {
-            manipulacaoBanners(element.attributes.posterImage.large, element.id, element.attributes.averageRating, divBanners)
-        };
+const manipulaInformacoes = (animes, dado) => {
+    animes.forEach((element) => element.addEventListener('click', (event) => {
+        const clickId = event.target.id;
+        const objetoAnime = dado.data.documents.find((element) => element.id === parseInt(clickId));
+        manipulacaoTexto(objetoAnime.titles.en, objetoAnime.descriptions.en, objetoAnime.score);
+        capturaVideo(objetoAnime['trailer_url']);
+        bannerPrincipal.style.backgroundImage = `url('${objetoAnime.banner_image}')`;
+        main.style.display = 'block';
+    }));
+}
+
+const capturaVideo = (url) => {
+    const tagVideo = document.querySelector('.video');
+    if (url !== undefined) {
+        tagVideo.src = url;
+    } else {
+        tagVideo.src = '';
+    }
+}
+
+aniApiAnimes().then((data) => {
+    data.data.documents.forEach((element) => {
+        manipulacaoBanners(element['cover_image'], element.id, element.score, divBanners);
+        manipulacaoBanners1(element['cover_image'], element.id, element.score, divBanners1)
     });
-  
-    // Linha 40 a 53 estou recuperando todas as imagens e jogando um evento de click nelas e dentro do evento de click eu estou comparando se o id do objeto é o mesmo id que foi pego pelo target com um find, se for ele é pego por uma constante, e apos isso eu uso a função manipulacaoTexto para colocar cada informação no seu devido lugar. 
-    const imagemDeAnimes = document.querySelectorAll('.imageAnimes')
-    imagemDeAnimes.forEach((element) => element.addEventListener('click', (event) => {
-        const clickId = event.target.id;
-        const objetoAnime = data.data.find((element) => element.id === clickId);
-        manipulacaoTexto(objetoAnime
-            .attributes.canonicalTitle, objetoAnime
-            .attributes.description, objetoAnime
-            .attributes.averageRating);
-            /* console.log(objetoAnime.attributes.youtubeVideoId) */
-        capturaVideo(objetoAnime.attributes.youtubeVideoId)
-        bannerPrincipal.style.backgroundImage = `url('${objetoAnime.attributes.posterImage.large}'`;
-        bannerPrincipal.style.backgroundRepeat = 'no-repeat'
-        main.style.display = 'block'
-    }))
+    const imagensDeAnimes = document.querySelectorAll('.imageAnimes');
+    manipulaInformacoes(imagensDeAnimes, data);
 });
 
-// Linha 30 a 39 => É feito um forEach em cima do data.data que seria o array de objetos para criar imagem com url e id;
-proximaLista.addEventListener('click', async () => {
-    let soma = 20;
-    kitsu(soma).then((data) => {
-        data.data.forEach((element) => {
-            if (!element.attributes
-                .canonicalTitle
-                .includes('Ghost in the Shell')) {
-            manipulacaoBanners(element.attributes.posterImage.large, element.id, element.attributes.averageRating, divBanners)
-            };
-        });
-        // Linha 40 a 53 estou recuperando todas as imagens e jogando um evento de click nelas e dentro do evento de click eu estou comparando se o id do objeto é o mesmo id que foi pego pelo target com um find, se for ele é pego por uma constante, e apos isso eu uso a função manipulacaoTexto para colocar cada informação no seu devido lugar. 
-        const imagemDeAnimes = document.querySelectorAll('.imageAnimes')
-        imagemDeAnimes.forEach((element) => element.addEventListener('click', (event) => {
-            const clickId = event.target.id;
-            const objetoAnime = data.data.find((element) => element.id === clickId);
-            manipulacaoTexto(objetoAnime
-                .attributes.canonicalTitle, objetoAnime
-                .attributes.description, objetoAnime
-                .attributes.averageRating);
-                /* console.log(objetoAnime.attributes.youtubeVideoId) */
-            capturaVideo(objetoAnime.attributes.youtubeVideoId)
-            bannerPrincipal.style.backgroundImage = `url('${objetoAnime.attributes.posterImage.large}'`;
-            bannerPrincipal.style.backgroundRepeat = 'no-repeat'
-            main.style.display = 'block'
-        }))
-    })
-    soma += 20
-});
 
-kitsu().then((data) => {
-  const data1 = data.data.sort((a,b) => parseFloat(b.attributes.averageRating) - parseFloat(a.attributes.averageRating));
-  data1.forEach((element) => {
-          if (!element.attributes
-            .canonicalTitle
-            .includes('Ghost in the Shell')) {
-        manipulacaoBanners(element.attributes.posterImage.large, element.id, element.attributes.averageRating, divBanners1);
-    };
-  });
-  
-  const imagemDeAnimes = document.querySelectorAll('.imageAnimes')
-    imagemDeAnimes.forEach((element) => element.addEventListener('click', (event) => {
-        const clickId = event.target.id;
-        const objetoAnime = data.data.find((element) => element.id === clickId);
-        manipulacaoTexto(objetoAnime
-            .attributes.canonicalTitle, objetoAnime
-            .attributes.description, objetoAnime
-            .attributes.averageRating);
-            /* console.log(objetoAnime.attributes.youtubeVideoId) */
-        capturaVideo(objetoAnime.attributes.youtubeVideoId)
-        bannerPrincipal.style.backgroundImage = `url('${objetoAnime.attributes.posterImage.large}')`;
-        bannerPrincipal.style.backgroundRepeat = 'no-repeat'
-        main.style.display = 'block'
-    }))
-});
 
-// Linha 30 a 39 => É feito um forEach em cima do data.data que seria o array de objetos para criar imagem com url e id;
-proximaLista2.addEventListener('click', async () => {
-  let soma = 20;
-  kitsu(soma).then((data) => {
-    const data1 = data.data.sort((a,b) => parseFloat(b.attributes.averageRating) - parseFloat(a.attributes.averageRating));
-      data1.forEach((element) => {
-          if (!element.attributes
-            .canonicalTitle
-            .includes('Ghost in the Shell')) {
-              manipulacaoBanners(element.attributes.posterImage.large, element.id, element.attributes.averageRating,  divBanners1)
-          };
-          ordernar();
-      });
-      // Linha 40 a 53 estou recuperando todas as imagens e jogando um evento de click nelas e dentro do evento de click eu estou comparando se o id do objeto é o mesmo id que foi pego pelo target com um find, se for ele é pego por uma constante, e apos isso eu uso a função manipulacaoTexto para colocar cada informação no seu devido lugar. 
-      const imagemDeAnimes = document.querySelectorAll('.imageAnimes')
-      imagemDeAnimes.forEach((element) => element.addEventListener('click', (event) => {
-          const clickId = event.target.id;
-          const objetoAnime = data.data.find((element) => element.id === clickId);
-          manipulacaoTexto(objetoAnime
-              .attributes.canonicalTitle, objetoAnime
-              .attributes.description, objetoAnime
-              .attributes.averageRating);
-              
-          capturaVideo(objetoAnime.attributes.youtubeVideoId)
-          bannerPrincipal.style.backgroundImage = `url('${objetoAnime.attributes.posterImage.large}'`;
-          bannerPrincipal.style.backgroundRepeat = 'no-repeat'
-          main.style.display = 'block'
-      }))
-  })
-  soma += 20
-});

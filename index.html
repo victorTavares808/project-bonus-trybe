@@ -1,59 +1,65 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="icon.ico" >
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/408799717e.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Orbitron:wght@509;523;620&display=swap" rel="stylesheet">
-    <link rel="animatrybe_background" href="Mangas _ Background _ by KurosakiGes.jpeg" >
-    <title>Document</title>
-</head>
-<body>
-    <header class="cabecalho">
-        <h1>ANIMA TRYBE</h1>
-    </header>
-    <main id="main"> 
-        <div class="banners">
-            <div class="container-texto">
-                <div class="textos">
-                    <h2 id="titulo-do-anime">Lorem, ipsum.</h1>
-                    <p id="descricao">Descrição: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse, eligendi.</p>
-                    <p id="nota"> nota: Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti repellat placeat fugit officia sit neque, mollitia consectetur hic commodi consequuntur omnis, nostrum doloribus, enim corrupti officiis. Obcaecati cumque laborum et!</p>
-                    <div class="container-video">
-                        <iframe class="video" width="600" height="300" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!-- Exemplo de como exibir os vídeos dos animes na tela -->
+<!-- <video controls>
+        <source src="https://server22.streamingaw.online/DDL/ANIME/OnePieceITA/OnePiece_Ep_001_ITA.mp4" type="video/mp4">
+    </video> -->
+
+
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="icon.ico" >
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/408799717e.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Orbitron:wght@509;523;620&display=swap" rel="stylesheet">
+        <link rel="animatrybe_background" href="Mangas _ Background _ by KurosakiGes.jpeg" >
+        <title>Document</title>
+    </head>
+    <body>
+        <header class="cabecalho">
+            <h1>ANIME TRYBE</h1>
+            <input class="caixa-de-busca" type="text">
+            <button class="pesquisar">Pesquisar</button>
+        </header>
+        <main id="main"> 
+            <div class="banners">
+                <div class="container-texto">
+                    <div class="textos">
+                        <h2 id="titulo-do-anime">Lorem, ipsum.</h1>
+                        <p id="descricao">Descrição: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse, eligendi.</p>
+                        <p id="nota"> nota: Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti repellat placeat fugit officia sit neque, mollitia consectetur hic commodi consequuntur omnis, nostrum doloribus, enim corrupti officiis. Obcaecati cumque laborum et!</p>
+                        <div class="container-video">
+                            <iframe class="video" width="600" height="300" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <div container="container-titulo-video">
-            <h2 class="titulo-video">Pensando....</h2>
-        </div> 
-    </main>
-    <h2 class = 'subtitle'>Rated</h2>
-    <div class="dispo">
-    <div class="carrossel">
-        <div class="animes"></div>
-    </div>
-    <div class="buton">
-        <span class="proximo btn"><i class="fa-solid fa-circle-plus"></i></span>
-    </div>
-    </div>
-    <h2 class = 'subtitle'>Rating</h2>
-    <div class="dispo">
+            <div container="container-titulo-video">
+                <h2 class="titulo-video">Pensando....</h2>
+            </div> 
+        </main>
+        <h2 class = 'subtitle'>Rated</h2>
+        <div class="dispo">
         <div class="carrossel">
-            <div class="animes1"></div>
+            <div class="animes"></div>
         </div>
         <div class="buton">
-            <span class="proximo btn2"><i class="fa-solid fa-circle-plus"></i></span>
+            <span class="proximo btn"><i class="fa-solid fa-circle-plus"></i></span>
         </div>
-    </div>
-    <footer id="rodape">
-
-    </footer>
-    <script src="script.js"></script>
-</body>
+        </div>
+        <h2 class = 'subtitle'>Rating</h2>
+        <div class="dispo">
+            <div class="carrossel">
+                <div class="animes1"></div>
+            </div>
+            <div class="buton">
+                <span class="proximo btn2"><i class="fa-solid fa-circle-plus"></i></span>
+            </div>
+        </div>
+        <video class="episodios" controls></video>
+        <script src="script.js"></script>
+    </body>
 </html>
